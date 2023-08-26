@@ -1,4 +1,4 @@
-#include<stdio.h>>
+#include<stdio.h>
 
 void main(){
     int a[5];
@@ -11,3 +11,6 @@ void main(){
         printf("%d ",a[i]);
     }
 }
+
+
+// RUN CODE: Ctrl+Alt+N

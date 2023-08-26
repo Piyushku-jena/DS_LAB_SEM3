@@ -2,19 +2,24 @@
 
 int main(){
     int a[5], b[5];
+    int t;
     printf("enter: \n");
     for(int i=0;i<5;i++){
         scanf("%d",&a[i]);
         b[i]=a[i];
     }
-    for(int j=0;j<4;j++){
-        for(int k=0;k<4;k++){
-            if(a[k]>a[k+1]){
-                int temp=a[k+1];
-                a[k+1]=a[k];
-                a[k]=temp;
-            }
+
+    printf("Enter place to ovrwrite (1-5) :");
+    scanf("%d",&t);
+    t=--t;
+
+    for(int j=0;j<5;j++){
+        
+        if (j==t){
+            printf("Enter number to be rewritten: ");
+            scanf("%d",&a[j]);
         }
+        
     }
     printf("input: \n");
     for(int i=0;i<5;i++){
