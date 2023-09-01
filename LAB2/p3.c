@@ -1,11 +1,11 @@
 #include<stdio.h>
 int main(){
-    char name[50];     
+    char strg[50];     
     int r=0;
 
-    printf("Enter your name: ");
-    scanf("%[^\n]s",&name);
-    char* ptr=name;
+    printf("Enter your string: ");
+    scanf("%[^\n]s",&strg);
+    char* ptr=strg;
     
     while(*ptr!='\0'){
         if (*ptr!=' '){

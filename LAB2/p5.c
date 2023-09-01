@@ -21,7 +21,7 @@ int main() {
     printf("Enter the elements:\n");
     for (int i = 0; i < n; i++) {
         printf("%dth value: ",i+1);
-        scanf("%d", &arr[i]);
+        scanf("%d", arr+i);
     }
 
     printf("Enter the element to search: ");
@@ -29,7 +29,7 @@ int main() {
 
     int err = 0;
     for (int i = 0; i < n; i++) {
-        if (arr[i] == searchno) {
+        if (*(arr+i) == searchno) {
             printf("%d exists at index %d.\n", searchno, i + 1);
             err = 1;
             break;
