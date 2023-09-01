@@ -18,6 +18,7 @@ int main(){
         if (j==t){
             printf("Enter number to be rewritten: ");
             scanf("%d",&a[j]);
+            
         }
         
     }
