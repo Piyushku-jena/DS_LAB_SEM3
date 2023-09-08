@@ -9,7 +9,7 @@ int main(){
         b[i]=a[i];
     }
 
-    printf("Enter place to ovrwrite (1-5) :");
+    printf("Enter place to overwrite (1-5) :");
     scanf("%d",&t);
     t=--t;
 

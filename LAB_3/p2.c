@@ -13,10 +13,10 @@ int main(){
         // ar2[i]=ar1[i];
     }
 
+    int temp=ar1[0]+1;
+
     for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(ar1[i]==ar1[j] &&)
-        }
+        
     }
 
     printf("Input:\n");
