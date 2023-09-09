@@ -1,27 +1,27 @@
 #include<stdio.h>
 
-struct Infos {
-    int roll;
-    char name[20];
-    char gender[10];
-    int marks;
-};
-
 int main(){
-    struct Infos stud;
-    struct Infos* s1;
-    s1=&stud;
+    int n;
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
 
-    printf("Provide input:\nRoll: ");
-    scanf("%d",&s1->roll);
-    printf("Name: ");
-    scanf("%s",&s1->name);
-    printf("Gender: ");
-    scanf("%s",&s1->gender);
-    printf("Marks: ");
-    scanf("%d",&s1->marks);
+    int ar1[n],ar2[n];
 
-    printf("Student Details:\nRoll: %d  Name: %s  Gender: %s  Marks: %d\n",s1->roll,s1->name,s1->gender,s1->marks);
-    return 0;
+    printf("Enter the elements: ");
+    for(int i=0;i<n;i++){
+        scanf("%d",&ar1[i]);
+        ar2[n-i-1]=ar1[i];
+    }
+
+    printf("Input:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ",ar1[i]);
+    }
+
+    printf("\nOutput:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ",ar2[i]);
+    }
+
 
 }
