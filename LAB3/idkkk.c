@@ -46,7 +46,7 @@ struct SparseMatrix{
     int *data;
 };
 
-// Create a sparse matrix in 3-tuple format
+// Sparse matrix in 3-tuple format
 struct SparseMatrix* createSparseMatrix(int numRows, int numCols, int numNonZero){
     struct SparseMatrix *matrix = (struct SparseMatrix*)malloc(sizeof(struct SparseMatrix));
     matrix->numRows = numRows;
@@ -62,8 +62,9 @@ struct SparseMatrix* createSparseMatrix(int numRows, int numCols, int numNonZero
 }
 
 void inputSparseMatrix(struct SparseMatrix *matrix){
-        printf("Enter the elements in row column value format:\n");
-    for (int i = 1; i <= numNonZero; i++){
+    printf("Enter the elements in row column value format:\n");
+        
+    for (int i = 1; i <= matrix->numNonZero; i++){
         scanf("%d %d %d", &matrix->rowIndices[i], &matrix->colIndices[i], &matrix->data[i]);
     }
 }
