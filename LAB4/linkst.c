@@ -21,18 +21,18 @@ void main(){
 	int flag=1, choice;
 	node *start=NULL;
 	while(flag==1){
-	    printf("Press 1 to create a node \n");
-	    printf("Press 2 to  display/Traverse \n");
-		printf("Press 3 to  add first \n");
-		printf("Press 4 to  add last \n");
-		printf("Press 5 to  add in any specified position \n");
-		printf("Press 6 to  delete first \n");
-		printf("Press 7 to  delete last \n");
-		printf("Press 8 to  delete any specified position \n");
-		printf("Press 9 to  search an element \n");
-		printf("Press 10 to  count number of elements \n");
-		printf("Press 11 to  reverse a linklist \n");
-		printf("Press 12 to  traverse \n");
+	    printf(" 1. Create a node \n");
+	    printf(" 2. Display/Traverse \n");
+		printf(" 3. Add first \n");
+		printf(" 4. Add last \n");
+		printf(" 5. Add in any specified position \n");
+		printf(" 6. Delete first \n");
+		printf(" 7. Delete last \n");
+		printf(" 8. Delete any specified position \n");
+		printf(" 9. Search an element \n");
+		printf("10. Count number of elements \n");
+		printf("11. Reverse a linklist \n");
+		printf("12. Traverse \n");
 		
         printf("Enter your Choice:");
         scanf("%d", &choice);
@@ -62,24 +62,22 @@ void main(){
             start= delete_specific(start);
             break;
         case 9: 
-            start= search(start);
+            // start= search(start);
             break;
         case 10: 
-            start= count(start);
+            // start= count(start);
             break;
         case 11: 
             start= reverse(start);
             break;
         case 12: 
-            start= travaerse(start);
+            // start= traverse(start);
             break;
-        
         default:
             printf("Invalid Choice Entered");
             break;
         }
 	}
-
 }
 
 //create linkedlist
@@ -101,27 +99,27 @@ node *create(node *start){
 	        last->next= newnode;
 	        last=newnode;
         }
-        printf("\n do you want to continue:  y/n \n");
-        ch=getch();
+        printf("\n do you want to continue: y/n \n");
+        ch=getchar();
     }while(ch=='y'||ch=='Y');
     return(start);
 }
 
 //display the information of the nodes
 void  display( node *start){
-	printf("\n Start->");
+	printf("\nStart->");
 	while (start!=NULL){
 		printf("--%d",start->info);
 		start=start->next;
 	}
-	printf("-End");
+	printf("--End\n");
 }
 //add first 
 node *addfirst(node *start){
 	node *newnode;
 	int newinfo;
 	newnode= (node*) malloc(sizeof(node));
-	printf("Enter the newinformation");
+	printf("Enter the new information: ");
 	scanf("%d",&newinfo);
 	newnode->info=newinfo;
 	newnode -> next= start;
@@ -133,7 +131,7 @@ node *addlast(node *start){
     node *newnode, *last;
     int newinfo;
     last=start;
-    printf("Enter the newinformation");
+    printf("Enter the new information: ");
 	scanf("%d",&newinfo);
 	newnode= (node*) malloc(sizeof(node));
 	newnode->info=newinfo;
@@ -143,8 +141,7 @@ node *addlast(node *start){
 	    return(start);
 	}
 	else{
-	    while(last->next!= NULL)
-	    {
+	    while(last->next!= NULL){
 	        last=last->next;
 	    }
 	    last->next=newnode;
@@ -157,7 +154,7 @@ node *add_specific(node* start){
     int newinfo, p,i;
     printf("Enter the Position where the node is to be inserted");
     scanf("%d",&p);
-    printf("Enter the newinformation");
+    printf("Enter the new information: ");
 	scanf("%d",&newinfo);
 	newnode= (node*) malloc(sizeof(node));
 	newnode->info=newinfo;
@@ -177,7 +174,6 @@ node *add_specific(node* start){
 	    else{
 	        newnode->next=temp; root->next=newnode;
 	    }
-	    
 	}
     return(start);
 }
@@ -186,8 +182,7 @@ node *add_specific(node* start){
 node *deletefirst(node *start){
     node *temp;
     temp=start;
-    if (temp == NULL) 
-    {
+    if (temp == NULL){
        printf("\nEmpty list...");
     }
     printf("\nValue of the deleted node = %d",temp->info);
