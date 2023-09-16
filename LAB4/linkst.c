@@ -16,7 +16,10 @@ node *deletefirst(node*);
 node* deletelast(node*);
 node* delete_specific(node*);
 node* reverse(node *);
-void freeLinkedList(node *start);
+void freeLinkedList(node *);
+void count(node *);
+void search(node *);
+
 
 void main(){
 	
@@ -34,8 +37,7 @@ void main(){
 		printf(" 9. Search an element \n");
 		printf("10. Count number of elements \n");
 		printf("11. Reverse a linklist \n");
-		printf("12. Traverse \n");
-        printf("13. Free: ");
+        printf("12. Free: ");
 		
         printf("Enter your Choice:");
         scanf("%d", &choice);
@@ -65,18 +67,15 @@ void main(){
             start= delete_specific(start);
             break;
         case 9: 
-            // start= search(start);
+            search(start);
             break;
         case 10: 
-            // start= count(start);
+            count(start);
             break;
         case 11: 
             start= reverse(start);
             break;
         case 12: 
-            // start= traverse(start);
-            break;
-        case 13:
             freeLinkedList(start);
             printf("Linked list freed.\n");
             return 0;
@@ -89,11 +88,7 @@ void main(){
 
 //free linkedlist
 void freeLinkedList(node *start) {
-    while (start != NULL) {
-        node *temp = start;
-        start = start->next;
-        free(temp);
-    }
+    free(start);
 }
 
 //create linkedlist
@@ -266,4 +261,39 @@ node* reverse(node *start) {
         curr = ptr; 
     } 
     start = prev;
+}
+
+void count(node* start) {
+    if (start == NULL) {
+        printf("Total number of Nodes are: 0\n");
+        return;
+    }
+    int c = 1;
+    node* current = start->next;
+    while (current != NULL) {
+        c++;
+        current = current->next;
+    }
+    printf("Total number of Nodes are: %d\n", c);
+}
+
+void search(node* start) {
+    if (start == NULL) {
+        printf("Total number of Nodes are: 0\n");
+        return;
+    }
+    int ele;
+    printf("Element to find: ");
+    scanf("%d",&ele);
+    int c = 1;
+    node* current = startt;
+    while (current != NULL){
+        if(current==elem){
+            printf("%s is present at position :%d \n ", elem ,c );
+            return;
+        }
+        c++;
+        current = current->next;
+    }
+    printf("%s not found in the list.\n" , elem ) ;
 }

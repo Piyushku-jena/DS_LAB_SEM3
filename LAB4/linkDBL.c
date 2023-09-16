@@ -15,24 +15,39 @@ node *add_specific(node*);
 node *deletefirst(node*);
 node* deletelast(node*);
 node* delete_specific(node*);
-node* reverse(node *); 
+void freeLinkedList(node *start);
+void count(node *start);
+
+
+node* reverse(node *);
 void main(){
-	
+    printf("Menu: \n");
+	printf(" 1. Create a node \n");
+    printf(" 2. Display/Traverse \n");
+    printf(" 3. Add first \n");
+    printf(" 4. Add last \n");
+    printf(" 5. Add in any specified position \n");
+    printf(" 6. Delete first \n");
+    printf(" 7. Delete last \n");
+    printf(" 8. Delete any specified position \n");
+    printf(" 9. Search an element \n");
+    printf("10. Count number of elements \n");
+    printf("11. Reverse a linklist \n");
+    printf("12. Delete entire linked list and quit: ");
 	int flag=1, choice;
 	node *start=NULL;
 	while(flag==1){
-	    printf("Press 1 to create a node \n");
-	    printf("Press 2 to  display/Traverse \n");
-		printf("Press 3 to  add first \n");
-		printf("Press 4 to  add last \n");
-		printf("Press 5 to  add in any specified position \n");
-		printf("Press 6 to  delete first \n");
-		printf("Press 7 to  delete last \n");
-		printf("Press 8 to  delete any specified position \n");
-		printf("Press 9 to  search an element \n");
-		printf("Press 10 to  count number of elements \n");
-		printf("Press 11 to  reverse a linklist \n");
-		printf("Press 12 to  traverse \n");
+	    // printf(" 1. Create a node \n");
+	    // printf(" 2. Display/Traverse \n");
+		// printf(" 3. Add first \n");
+		// printf(" 4. Add last \n");
+		// printf(" 5. Add in any specified position \n");
+		// printf(" 6. Delete first \n");
+		// printf(" 7. Delete last \n");
+		// printf(" 8. Delete any specified position \n");
+		// printf(" 9. Search an element \n");
+		// printf("10. Count number of elements \n");
+		// printf("11. Reverse a linklist \n");
 		
         printf("Enter your Choice:");
         scanf("%d", &choice);
@@ -71,9 +86,9 @@ void main(){
             start= reverse(start);
             break;
         case 12: 
-            start= travaerse(start);
-            break;
-        
+            start= freeLinkedList(start);
+            printf("Linked list freed.\n");
+            flag = 0;        
         default:
             printf("Invalid Choice Entered");
             break;
