@@ -39,7 +39,7 @@ void main(){
 		printf("11. Reverse a linklist \n");
         printf("12. Free: ");
 		
-        printf("Enter your Choice:");
+        printf("\nEnter your Choice:");
         scanf("%d", &choice);
         switch(choice){
         case 1: 
@@ -110,7 +110,8 @@ node *create(node *start){
 	        last->next= newnode;
 	        last=newnode;
         }
-        printf("\n do you want to continue: y/n \n");
+        printf("\nDo you want to continue: y/n \n");
+        char trash=getchar();
         ch=getchar();
     }while(ch=='y'||ch=='Y');
     return(start);
@@ -179,7 +180,7 @@ node *add_specific(node* start){
 	    while(i<p && temp->next != NULL){
 	        i++; root=temp; temp=temp->next;
 	    }
-	    if(temp->next=NULL){
+	    if(temp->next==NULL){
 	        temp->next=newnode;
 	    }
 	    else{
@@ -288,12 +289,12 @@ void search(node* start) {
     int c = 1;
     node* current = start;
     while (current != NULL){
-        if(current==ele){
-            printf("%s is present at position :%d \n ", ele ,c );
+        if(current->info==ele){
+            printf("%d is present at position: %d \n", ele ,c );
             return;
         }
         c++;
         current = current->next;
     }
-    printf("%s not found in the list.\n" , ele ) ;
+    printf("%d not found in the list.\n" , ele ) ;
 }
