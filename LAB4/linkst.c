@@ -78,7 +78,7 @@ void main(){
         case 12: 
             freeLinkedList(start);
             printf("Linked list freed.\n");
-            return 0;
+            return;
         default:
             printf("Invalid Choice Entered");
             break;
@@ -286,14 +286,14 @@ void search(node* start) {
     printf("Element to find: ");
     scanf("%d",&ele);
     int c = 1;
-    node* current = startt;
+    node* current = start;
     while (current != NULL){
-        if(current==elem){
-            printf("%s is present at position :%d \n ", elem ,c );
+        if(current==ele){
+            printf("%s is present at position :%d \n ", ele ,c );
             return;
         }
         c++;
         current = current->next;
     }
-    printf("%s not found in the list.\n" , elem ) ;
+    printf("%s not found in the list.\n" , ele ) ;
 }
