@@ -3,6 +3,7 @@
 struct node{
 	int info;
 	struct node *next;
+    struct node *prv;
 };
 typedef struct node node;
 
@@ -15,11 +16,11 @@ node *add_specific(node*);
 node *deletefirst(node*);
 node* deletelast(node*);
 node* delete_specific(node*);
+node* reverse(node *);
 void freeLinkedList(node *start);
 void count(node *start);
+void search(node *start);
 
-
-node* reverse(node *);
 void main(){
     printf("Menu: \n");
 	printf(" 1. Create a node \n");
@@ -37,18 +38,6 @@ void main(){
 	int flag=1, choice;
 	node *start=NULL;
 	while(flag==1){
-	    // printf(" 1. Create a node \n");
-	    // printf(" 2. Display/Traverse \n");
-		// printf(" 3. Add first \n");
-		// printf(" 4. Add last \n");
-		// printf(" 5. Add in any specified position \n");
-		// printf(" 6. Delete first \n");
-		// printf(" 7. Delete last \n");
-		// printf(" 8. Delete any specified position \n");
-		// printf(" 9. Search an element \n");
-		// printf("10. Count number of elements \n");
-		// printf("11. Reverse a linklist \n");
-		
         printf("Enter your Choice:");
         scanf("%d", &choice);
         switch(choice){
@@ -88,13 +77,18 @@ void main(){
         case 12: 
             start= freeLinkedList(start);
             printf("Linked list freed.\n");
-            flag = 0;        
+            flag = 0;
+            return;
         default:
             printf("Invalid Choice Entered");
             break;
         }
 	}
+}
 
+//free linkedlist
+void freeLinkedList(node *start) {
+    free(start);
 }
 
 //create linkedlist
@@ -108,6 +102,7 @@ node *create(node *start){
 		newnode=(node *)malloc(sizeof(node));
 		newnode->info=newinfo;
 		newnode->next=NULL;
+        newnode->prev = last;
 		if(start==NULL){
 			start= newnode;
 			last=newnode;
@@ -117,6 +112,7 @@ node *create(node *start){
 	        last=newnode;
         }
         printf("\n do you want to continue:  y/n \n");
+        char trash = getchar();
         ch=getch();
     }while(ch=='y'||ch=='Y');
     return(start);
@@ -124,13 +120,14 @@ node *create(node *start){
 
 //display the information of the nodes
 void  display( node *start){
-	printf("\n Start->");
+	printf("\nStart->");
 	while (start!=NULL){
 		printf("--%d",start->info);
 		start=start->next;
 	}
 	printf("-End");
 }
+
 //add first 
 node *addfirst(node *start){
 	node *newnode;
@@ -140,9 +137,14 @@ node *addfirst(node *start){
 	scanf("%d",&newinfo);
 	newnode->info=newinfo;
 	newnode -> next= start;
+    newnode->prev = NULL;
+    if (start != NULL){
+        start->prev = newnode; // Update the previous pointer of the old first node
+    }
 	start=newnode;
 	return(start);
 }
+
 // Add last 
 node *addlast(node *start){
     node *newnode, *last;
@@ -163,6 +165,7 @@ node *addlast(node *start){
 	        last=last->next;
 	    }
 	    last->next=newnode;
+        newnode->prev = last; // Update the previous pointer of the new last node
 	    return(start);
 	}
 }
@@ -179,6 +182,10 @@ node *add_specific(node* start){
 	newnode -> next=NULL;
 	if(start==NULL||p==1){
 	    newnode->next=start;
+        newnode->prev = NULL;
+        if (start != NULL) {
+            start->prev = newnode; // Update the previous pointer of the old first node
+        }
 	    start=newnode;
 	    return(start);
 	}else{
@@ -188,9 +195,12 @@ node *add_specific(node* start){
 	    }
 	    if(temp->next=NULL){
 	        temp->next=newnode;
-	    }
-	    else{
-	        newnode->next=temp; root->next=newnode;
+            newnode->prev = temp; // Update the previous pointer of the new last node
+	    }else{
+	        newnode->next=temp;
+            newnode->prev = root; // Update the previous pointer of the new node
+            root->next=newnode;
+            temp->prev = newnode; // Update the previous pointer of the old node
 	    }
 	    
 	}
@@ -199,13 +209,16 @@ node *add_specific(node* start){
 
 //delete first
 node* deletefirst(node* start) {
+    node* temp = start;
     if (start == NULL) {
         printf("\nEmpty list...\n");
         return NULL;
     }
-    node* temp = start;
-    start = start->next;
     printf("Value of the deleted node = %d\n", temp->info);
+    start = temp->next;
+    if (start != NULL) {
+        start->prev = NULL; // Update the previous pointer of the new first node
+    }
     free(temp);
     return start;
 }
@@ -222,6 +235,7 @@ node* deletelast(node *start){
         prev=last;
         last=last->next;
     }
+    printf("\nValue of the deleted node = %d", last->info);
     free(last);
     prev->next=NULL;
     return(start);
@@ -241,6 +255,9 @@ node* delete_specific(node *start){
     }
     if(temp->info==delinfo && prev==NULL){
         start=temp->next;
+        if (start != NULL) {
+            start->prev = NULL; // Update the previous pointer of the new first node
+        }
         free(temp);
         return(start);
     }
@@ -250,23 +267,71 @@ node* delete_specific(node *start){
     }
     if(temp->info==delinfo){
         prev->next=temp->next;
+        if(temp->next != NULL){
+            temp->next->prev = prev; // Update the previous pointer of the next node
+        }
         free(temp);
+    }
+    if (temp == NULL) {
+        printf("Element not found in the list.\n");
+        return start;
     }
     return(start);    
 }
 
+//Reverse
 node* reverse(node *start) { 
-    node* prev = NULL, *ptr; 
-    node* curr=start; 
+    node* temp = NULL, *ptr; 
+    node* current=start; 
     if(start==NULL){
       printf("\nEmpty List ...");
       return(NULL);
     }
-    while (curr != NULL){
-        ptr = curr->next;   
-        curr->next = prev;    
-        prev = curr; 
-        curr = ptr; 
-    } 
-    start = prev; 
+    while (current != NULL){
+        temp = current->prev; //Swaps prev and next pointers   
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev; //Move to next node
+    }
+    if(temp!=NULL){
+        start=temp->prev;//Update start pointer
+    }
+    return start;
+}
+
+//Count
+void count(node* start) {
+    if (start == NULL) {
+        printf("Total number of Nodes are: 0\n");
+        return;
+    }
+    int c = 1;
+    node* current = start->next;
+    while (current != NULL) {
+        c++;
+        current = current->next;
+    }
+    printf("Total number of Nodes are: %d\n", c);
+}
+
+//Search
+void search(node* start) {
+    if (start == NULL) {
+        printf("Total number of Nodes are: 0\n");
+        return;
+    }
+    int ele;
+    printf("Element to find: ");
+    scanf("%d",&ele);
+    int c = 1;
+    node* current = start;
+    while (current != NULL){
+        if(current->info==ele){
+            printf("%d is present at position: %d \n", ele ,c );
+            return;
+        }
+        c++;
+        current = current->next;
+    }
+    printf("%d not found in the list.\n" , ele ) ;
 }

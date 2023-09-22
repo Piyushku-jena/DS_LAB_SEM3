@@ -20,24 +20,35 @@ void freeLinkedList(node *);
 void count(node *);
 void search(node *);
 
-
-void main(){
-	
+void main(){	
 	int flag=1, choice;
 	node *start=NULL;
+    printf("Menu: \n");
+    printf(" 1. Create a node \n");
+	printf(" 2. Display/Traverse \n");
+	printf(" 3. Add first \n");
+	printf(" 4. Add last \n");
+	printf(" 5. Add in any specified position \n");
+	printf(" 6. Delete first \n");
+	printf(" 7. Delete last \n");
+	printf(" 8. Delete any specified position \n");
+	printf(" 9. Search an element \n");
+	printf("10. Count number of elements \n");
+	printf("11. Reverse a linklist \n");
+    printf("12. Free: ");
 	while(flag==1){
-	    printf(" 1. Create a node \n");
-	    printf(" 2. Display/Traverse \n");
-		printf(" 3. Add first \n");
-		printf(" 4. Add last \n");
-		printf(" 5. Add in any specified position \n");
-		printf(" 6. Delete first \n");
-		printf(" 7. Delete last \n");
-		printf(" 8. Delete any specified position \n");
-		printf(" 9. Search an element \n");
-		printf("10. Count number of elements \n");
-		printf("11. Reverse a linklist \n");
-        printf("12. Free: ");
+	    // printf(" 1. Create a node \n");
+	    // printf(" 2. Display/Traverse \n");
+		// printf(" 3. Add first \n");
+		// printf(" 4. Add last \n");
+		// printf(" 5. Add in any specified position \n");
+		// printf(" 6. Delete first \n");
+		// printf(" 7. Delete last \n");
+		// printf(" 8. Delete any specified position \n");
+		// printf(" 9. Search an element \n");
+		// printf("10. Count number of elements \n");
+		// printf("11. Reverse a linklist \n");
+        // printf("12. Free: ");
 		
         printf("\nEnter your Choice:");
         scanf("%d", &choice);
@@ -248,6 +259,7 @@ node* delete_specific(node *start){
     return(start);    
 }
 
+//Reverse
 node* reverse(node *start) { 
     node* prev = NULL, *ptr; 
     node* curr=start; 
@@ -264,6 +276,7 @@ node* reverse(node *start) {
     start = prev;
 }
 
+//Count
 void count(node* start) {
     if (start == NULL) {
         printf("Total number of Nodes are: 0\n");
@@ -278,6 +291,7 @@ void count(node* start) {
     printf("Total number of Nodes are: %d\n", c);
 }
 
+//Search
 void search(node* start) {
     if (start == NULL) {
         printf("Total number of Nodes are: 0\n");
