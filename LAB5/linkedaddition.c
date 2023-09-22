@@ -8,7 +8,7 @@ struct node{
 typedef struct node node;
 
 //Prototype Declaration
-node *create (node*);
+node *create(node*);
 void displayPolynomial(node*);
 node* addPolynomials(node* poly1, node* poly2);
 void freeLinkedList(node *);
@@ -49,34 +49,32 @@ void freeLinkedList(node* start) {
 
 //create linkedlist
 node *create(node *start){
-	node  *newnode, *last;
-	char ch;
-	int coef, expo;
-	do{
-		printf("Enter the coefficient: ");
+	node  *newNode, *last;
+	int degree;
+
+	printf("Enter the highest degree of the polynomial: ");
+    scanf("%d", &degree);
+
+    for (int i = degree; i >= 0; i--) {
+        int coef;
+        printf("Enter the coefficient for x^%d: ", i);
         scanf("%d", &coef);
 
-        printf("Enter the exponent: ");
-        scanf("%d", &expo);
+        if (coef != 0) {
+            newNode = (node*)malloc(sizeof(node));
+            newNode->coef = coef;
+            newNode->expo = i;
+            newNode->next = NULL;
 
-		newnode=(node *)malloc(sizeof(node));
-		newnode->coef = coef;
-        newnode->expo = expo;
-		newnode->next=NULL;
-
-		if(start==NULL){
-			start= newnode;
-			last=newnode;
-		}
-        else{
-	        last->next= newnode;
-	        last=newnode;
+            if (start == NULL) {
+                start = newNode;
+                last = newNode;
+            } else {
+                last->next = newNode;
+                last = newNode;
+            }
         }
-        printf("\nDo you want to continue: y/n \n");
-        char trash=getchar();
-        ch=getchar();
-    }while(ch=='y'||ch=='Y');
-
+    }
     return(start);
 }
 

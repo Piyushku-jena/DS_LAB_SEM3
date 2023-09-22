@@ -33,20 +33,22 @@ void freeLinkedList(node* start) {
 }
 
 // Create a sparse matrix
-node* createSparseMatrix() {
+node* createSparseMatrix(node *) {
     node* start = NULL;
     int numRows, numCols;
+    node  *newnode, *last;
     
     printf("Enter the number of rows and columns: ");
     scanf("%d %d", &numRows, &numCols);
 
+    printf("Enter elements of sparse matrix: ");
     for (int i = 0; i < numRows; i++) {
         for (int j = 0; j < numCols; j++) {
             int val;
-            printf("Enter the value at (%d, %d): ", i, j);
+            // printf("Enter the value at (%d, %d): ", i, j);
             scanf("%d", &val);
             if (val != 0) {
-                node* newnode = (node*)malloc(sizeof(node));
+                newnode = (node*)malloc(sizeof(node));
                 newnode->row = i;
                 newnode->col = j;
                 newnode->val = val;
@@ -71,11 +73,4 @@ void displaySparseMatrix(node* start) {
         printf("%d\t%d\t%d\n", start->row, start->col, start->val);
         start = start->next;
     }
-}
-
-int main() {
-    node* sparseMatrix = createSparseMatrix();
-    displaySparseMatrix(sparseMatrix);
-    freeLinkedList(sparseMatrix);
-    return 0;
 }
