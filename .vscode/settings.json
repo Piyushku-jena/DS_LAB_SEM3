@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "stdio.h": "c",
-        "LINKEDLIST.C": "cpp"
+        "LINKEDLIST.C": "cpp",
+        "linkedmatrix": "c"
     }
 }
