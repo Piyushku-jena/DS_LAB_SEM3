@@ -3,7 +3,7 @@
 struct node{
 	int info;
 	struct node *next;
-    struct node *prv;
+    struct node *prev;
 };
 typedef struct node node;
 
@@ -34,7 +34,7 @@ void main(){
     printf(" 9. Search an element \n");
     printf("10. Count number of elements \n");
     printf("11. Reverse a linklist \n");
-    printf("12. Delete entire linked list and quit: ");
+    printf("12. Delete entire linked list and quit: \n");
 	int flag=1, choice;
 	node *start=NULL;
 	while(flag==1){
@@ -66,16 +66,16 @@ void main(){
             start= delete_specific(start);
             break;
         case 9: 
-            start= search(start);
+            search(start);
             break;
         case 10: 
-            start= count(start);
+            count(start);
             break;
         case 11: 
             start= reverse(start);
             break;
         case 12: 
-            start= freeLinkedList(start);
+            freeLinkedList(start);
             printf("Linked list freed.\n");
             flag = 0;
             return;
