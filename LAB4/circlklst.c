@@ -93,8 +93,7 @@ node *create(node *start){
 			start=newnode;
 			last= newnode;
             last->next=start;
-		}
-        else{
+		}else{
 	        last->next=newnode;
 	        last=newnode;
             newnode->next=start;

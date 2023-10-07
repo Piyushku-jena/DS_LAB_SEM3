@@ -9,6 +9,25 @@ struct Stack {
     char items[MAX_SIZE];
 };
 
+void push(struct Stack*,char);
+int pop(struct Stack*);
+int is_operator(char);
+int precedence(char);
+int infix_to_postfix;
+
+int main() {
+    char infix[100], postfix[100];
+    
+    printf("Enter an infix expression: ");
+    scanf("%s", infix);
+    
+    infix_to_postfix(infix, postfix);
+    
+    printf("Postfix expression: %s\n", postfix);
+    
+    return 0;
+}
+
 void push(struct Stack* stack, char c) {
     if (stack->top == MAX_SIZE - 1) {
         printf("Stack overflow\n");
@@ -44,8 +63,8 @@ int precedence(char c) {
 }
 
 void infix_to_postfix(char* infix, char* postfix) {
-    struct Stack stack;
-    stack.top = -1;
+    struct Stack stk;
+    stk.top = -1;
     int i, j = 0;
 
     for (i = 0; infix[i]; i++) {
@@ -56,14 +75,14 @@ void infix_to_postfix(char* infix, char* postfix) {
         } else if (c == '(') {
             push(&stack, c);
         } else if (c == ')') {
-            while (stack.top != -1 && stack.items[stack.top] != '(') {
-                postfix[j++] = pop(&stack);
+            while (stk.top != -1 && stk.items[stack.top] != '(') {
+                postfix[j++] = pop(&stk);
             }
-            if (stack.top != -1 && stack.items[stack.top] == '(') {
-                pop(&stack);
+            if (stk.top != -1 && stk.items[stack.top] == '(') {
+                pop(&stk);
             }
         } else {
-            while (stack.top != -1 && precedence(c) <= precedence(stack.items[stack.top])) {
+            while (stk.top != -1 && precedence(c) <= precedence(stk.items[stack.top])) {
                 postfix[j++] = pop(&stack);
             }
             push(&stack, c);
@@ -75,17 +94,4 @@ void infix_to_postfix(char* infix, char* postfix) {
     }
 
     postfix[j] = '\0';
-}
-
-int main() {
-    char infix[100], postfix[100];
-    
-    printf("Enter an infix expression: ");
-    scanf("%s", infix);
-    
-    infix_to_postfix(infix, postfix);
-    
-    printf("Postfix expression: %s\n", postfix);
-    
-    return 0;
 }
