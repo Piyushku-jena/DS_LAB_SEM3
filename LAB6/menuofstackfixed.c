@@ -30,7 +30,6 @@ void main() {
     createEmptyStack(s);
     menu();
     
-
     while (1) {
         printf("Enter your choice: ");
         scanf("%d", &ch);
@@ -70,18 +69,12 @@ void createEmptyStack(st *s) {
 
 // Check if the stack is full
 int isfull(st *s) {
-  if (s->top == MAX - 1)
-    return 1;
-  else
-    return 0;
+  return s->top == MAX - 1;
 }
 
 // Check if the stack is empty
 int isempty(st *s) {
-  if (s->top == -1)
-    return 1;
-  else
-    return 0;
+  return s->top == -1;
 }
 
 // Add elements into stack
@@ -100,11 +93,10 @@ void pop(st *s) {
   if (isempty(s)) {
     printf("\n STACK EMPTY \n");
   } else {
-    printf("Item popped= %d", s->items[s->top]);
+    printf("Item popped= %d\n", s->items[s->top]);
     s->top--;
   }
   count--;
-  printf("\n");
 }
 
 // Print elements of stack
@@ -113,7 +105,7 @@ void printStack(st *s) {
         printf("STACK EMPTY\n");
     } else {
         printf("Stack: ");
-        for (int i = 0; i <= s->top; i++) {
+        for (int i = 0; i <= s->top; i++){
             printf("%d ", s->items[i]);
         }
         printf("\n");

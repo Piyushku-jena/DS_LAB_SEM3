@@ -23,7 +23,7 @@ void main(){
     printf(" 3. Display/Traverse \n");
 	printf(" 4. EXIT \n");
 	while(flag==1){
-        printf("\nEnter your Choice:");
+        printf("\nEnter Choice:");
         scanf("%d", &choice);
         switch(choice){
         case 1: 
@@ -37,10 +37,15 @@ void main(){
             break;
         case 4:
             freeLinkedList(start);
-            printf("Linked list freed.\n");
+            printf("Stack freed.\n");
             return;
         default:
-            printf("Invalid Choice Entered");
+            printf("Invalid Choice Entered\n\n");
+            printf("Menu: \n");
+            printf(" 1. PUSH \n");
+            printf(" 2. POP \n");
+            printf(" 3. DISPLAY \n");
+            printf(" 4. EXIT \n");
             break;
         }
 	}
@@ -55,10 +60,10 @@ void freeLinkedList(node *start) {
 void  display( node *start){
 	printf("\nBottom->");
 	while (start!=NULL){
-		printf("--%d",start->info);
+		printf("  %d",start->info);
 		start=start->next;
 	}
-	printf("--Top\n");
+	printf("->Top\n");
 }
 
 // Add last 
@@ -66,7 +71,7 @@ node *addlast(node *start){
     node *newnode, *last;
     int newinfo;
     last=start;
-    printf("Enter the new information: ");
+    printf("Element to push: ");
 	scanf("%d",&newinfo);
 	newnode= (node*) malloc(sizeof(node));
 	newnode->info=newinfo;
@@ -96,6 +101,7 @@ node* deletelast(node *start){
         prev=last;
         last=last->next;
     }
+    printf("Popped: %d\n", last->info);
     free(last);
     prev->next=NULL;
     return(start);

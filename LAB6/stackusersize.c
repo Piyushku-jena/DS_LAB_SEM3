@@ -22,19 +22,19 @@ void menu();
 int main() {
     int ch, size;
     
-    printf("Enter the size of the stack: ");
+    printf("Size: ");
     scanf("%d", &size);
     
     st *s = (st *)malloc(sizeof(st));
     createEmptyStack(s, size);
+    menu();
 
     while (1) {
-        menu();
-        printf("Enter your choice: ");
+        printf("Enter choice: ");
         scanf("%d", &ch);
         switch (ch) {
             case 1:
-                printf("Enter element to push: ");
+                printf("Element to push: ");
                 int item;
                 scanf("%d", &item);
                 push(s, item);
@@ -47,9 +47,11 @@ int main() {
                 break;
             case 4:
                 freeStack(s);
+                printf("-EXIT-");
                 exit(0);
             default:
                 printf("Invalid choice\n");
+                menu();
         }
     }
 
@@ -67,7 +69,7 @@ void menu() {
 void createEmptyStack(st *s, int size) {
     s->top = -1;
     s->size = size;
-    s->items = (int *)malloc(size * sizeof(int));
+    s->items = (int *)malloc(size*sizeof(int));
 }
 
 int isfull(st *s) {
@@ -80,17 +82,17 @@ int isempty(st *s) {
 
 void push(st *s, int newitem) {
     if (isfull(s)) {
-        printf("STACK FULL\n");
+        printf("STACK OVERFLOW !!!\n");
     } else {
         s->top++;
         s->items[s->top] = newitem;
-        printf("Pushed: %d\n", newitem);
+        // printf("Pushed: %d\n", newitem);
     }
 }
 
 void pop(st *s) {
     if (isempty(s)) {
-        printf("STACK EMPTY\n");
+        printf("STACK UNDERFLOW !!!\n");
     } else {
         printf("Popped: %d\n", s->items[s->top]);
         s->top--;

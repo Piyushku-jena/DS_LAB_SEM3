@@ -1,2 +1,2 @@
-# DS_LAB_SEM
+# DS_LAB
  SEMESTER_3
