@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include <ctype.h>
+#define MAX_STACK_SIZE 100
 
 typedef struct node{
     char data;
@@ -12,14 +14,12 @@ int top = -1;
 
 void PUSH(node *item) {
     if (top >= MAX_STACK_SIZE - 1) {
-        // Stack overflow, handle error
         printf("Stack overflow\n");
     }
     stack[++top] = item;
 }
 node *POP() {
     if (top < 0) {
-        // Stack underflow, handle error
         printf("Stack underflow\n");
     }
     return stack[top--];
@@ -55,14 +55,20 @@ void postorder(node* root){
         printf("%c ",root->data);
     }
 }
-void exprtree_post(char a[]){
+void exptree(char a[],int isPre){
     int i;
     for(i=0;a[i]!='\0';i++){
         if (isdigit(a[i]) || isalpha(a[i])) {
             PUSH(createNode(a[i]));
         } else if(a[i] == '+' || a[i] == '-' || a[i] == '*' || a[i] == '/') {
-            right = POP();
-            left = POP();
+            node *left, *right, *New_Node;
+            if (isPre) {
+                right = POP();
+                left = POP();
+            } else {
+                left = POP();
+                right = POP();
+            }
             New_Node = createNode(a[i]);
             New_Node->left = left;
             New_Node->right = right;
@@ -70,30 +76,62 @@ void exprtree_post(char a[]){
         }
     }
 }
-void exptree_pre(char a[]){
-    int i;
-    for(i=0;a[i]!='\0';i++){
-        if (isdigit(a[i]) || isalpha(a[i])) {
-            PUSH(createNode(a[i]));
-        } else if(a[i] == '+' || a[i] == '-' || a[i] == '*' || a[i] == '/') {
-            left = POP();
-            right = POP();
-            New_Node = createNode(a[i]);
-            New_Node->left = left;
-            New_Node->right = right;
-            PUSH(New_Node);
-        }
+void displayTree(node *root) {
+    printf("Expression Tree: ");
+    inorder(root);
+    printf("\n");
+}
+
+void freeTree(node *root) {
+    if (root != NULL) {
+        freeTree(root->left);
+        freeTree(root->right);
+        free(root);
     }
 }
 
-// void insert(node **root,char x){
-//     if(*root==NULL){
-//         *root=createNode(x);
-//     }else{
-//         if((*root)->data > x){
-//             insert(&((*root)->left),x);
-//         }else{
-//             insert(&((*root)->right),x);
-//        }
-//     }
-// }
+int main() {
+    char expression[100];
+    int choice, isPre;
+
+    printf("\nMenu:\n");
+    printf("1. Enter Expression\n");
+    printf("2. Build Expression Tree (Pre-order)\n");
+    printf("3. Build Expression Tree (Post-order)\n");
+    printf("4. Exit\n");
+    do {
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter the expression: ");
+                scanf("%s", expression);
+                break;
+            case 2:
+                printf("Building Expression Tree (Pre-order)\n");
+                isPre = 1;
+                exptree(expression, isPre);
+                displayTree(stack[0]); // Assuming the result is at the top of the stack
+                freeTree(stack[0]);    // Free memory allocated for the tree
+                top = -1;               // Reset the stack
+                break;
+
+            case 3:
+                printf("Building Expression Tree (Post-order)\n");
+                isPre = 0;
+                exptree(expression, isPre);
+                displayTree(stack[0]); // Assuming the result is at the top of the stack
+                freeTree(stack[0]);    // Free memory allocated for the tree
+                top = -1;               // Reset the stack
+                break;
+            case 4:
+                printf("Exiting program\n");
+                break;
+            default:
+                printf("Invalid choice. Please enter a valid option.\n");
+                break;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
