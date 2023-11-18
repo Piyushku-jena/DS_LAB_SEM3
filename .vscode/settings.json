@@ -4,6 +4,9 @@
         "stdio.h": "c",
         "LINKEDLIST.C": "cpp",
         "linkedmatrix": "c",
-        "MENUSTACK.C": "cpp"
+        "MENUSTACK.C": "cpp",
+        "array": "c",
+        "string": "c",
+        "string_view": "c"
     }
 }
